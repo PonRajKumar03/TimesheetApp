@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Sheet } from '../_models/sheet';
 import { Timesheet } from '../_models/timesheet';
 import { View } from '../_models/viewrequest';
@@ -15,7 +16,7 @@ export class ViewserviceService {
   date: [];
   ID : [];
 
-  baseUrl = "https://localhost:5001/api/";
+  baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
   
   viewtimesheet(model:View){

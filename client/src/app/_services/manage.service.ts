@@ -6,6 +6,7 @@ import { Newclient } from '../_models/newclient';
 import { Projects } from '../_models/projects';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
+import { environment } from 'src/environments/environment';
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXTENSION = '.xlsx';
@@ -13,7 +14,7 @@ const EXCEL_EXTENSION = '.xlsx';
   providedIn: 'root'
 })
 export class ManageService {
-  baseUrl = "https://localhost:5001/api/"
+  baseUrl = environment.apiUrl;
   constructor(public http: HttpClient) { }
   projects : Projects;
   projectid = [];
