@@ -1,0 +1,77 @@
+<div class="container row  text-center">
+    <div class="col-md-6" style="padding-right: 60px; padding-left: 60px;">
+        <h2>Manage Employees</h2>
+        <hr>
+        <button (click)="modetoggle('add')" class="btn btn-primary mt-4 mb-4">Add new employee</button>
+        <br>
+        <button (click)="modetoggle('manage')" class="btn btn-primary mb-4">Manage existing employees</button>
+        <br>
+        <button (click)="modetoggle('pull')" class="btn btn-primary">Pull reports</button>
+    </div>
+    <div class="col-md-6" style="padding-right: 60px; padding-left: 60px;">
+        <ng-container *ngIf="this.mode == 'add'">
+            <h2>Add employee</h2>
+            <hr>
+            <form #registerForm="ngForm" (ngSubmit)="addemployee()" autocomplete="off">
+                
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" [(ngModel)]="model.email" placeholder="E-mail ID">
+                </div>
+                
+                <div class="form-group">          
+                    <input type="text" class="form-control" name="firstname" [(ngModel)]="model.firstname" placeholder="First Name">
+                </div>
+                
+                <div class="form-group">          
+                    <input type="text" class="form-control" name="lastname" [(ngModel)]="model.lastname" placeholder="Last Name">
+                </div>
+                <div class="form-group">          
+                    <input type="date" class="form-control" name="dob" [(ngModel)]="model.dob" placeholder="Date of birth">
+                </div>
+                
+                <div class="form-group text-center">
+                    <button type="submit" class="btn1 btn btn-md btn-success mr-3">Add</button>
+                    <button class="btn1 btn btn-md btn-warning" (click)="cancel()">Cancel</button>
+                </div>
+            </form>
+        </ng-container>
+        <ng-container *ngIf="this.mode == 'manage'">
+            <h2>Manage employees</h2>
+            <hr>
+            <div class="form-group text-left">
+                <label for="employeename">Employee Name:</label>
+                <select class="form-control" [(ngModel)]="this.chosenemployee">
+                    <option *ngFor="let item of this.employeelist" value="{{item}}" name="employeename">{{item}}</option>
+                </select>
+            </div>
+            <ng-container *ngIf="this.managemode == '' ">
+                <button (click)="managemodetoggle('allow')" class="btn btn-primary mr-3">Allow Date</button>
+                <button (click)="home()"  class="btn btn-warning">Cancel</button>
+            </ng-container>
+            <ng-container *ngIf="this.managemode =='allow'">
+                <input type="number" class="form-control" placeholder="Number of Days to allow" [(ngModel)]="this.numberofDays">                        
+                <br>
+                <button (click)="done()"class="btn btn-success">Done</button>
+                <button (click)="home()" class="btn btn-warning">Cancel</button>
+                
+            </ng-container>
+                                
+        </ng-container>
+        <ng-container *ngIf="this.mode == 'pull'">
+            <h2>Pull report</h2>
+            <hr>
+            <div class="text-left">
+            <label for="startdate">Start Date:</label>
+            <input type="date" class="form-control" name="startdate" [(ngModel)]="pullreport.startDate">
+            <br>
+            <label for="enddate">End Date:</label>
+            <input name="enddate" type="date" class="form-control" [(ngModel)]="pullreport.endDate">
+            </div>
+            <br>
+            <button class="btn btn-success mr-3" (click)="pullreportfunc()">Pull Reports</button>
+            <button class="btn btn-danger" (click)="deletereport()">Delete Reports</button>
+        </ng-container>
+        
+
+    </div>
+</div>

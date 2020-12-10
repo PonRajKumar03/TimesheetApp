@@ -1,0 +1,30 @@
+<style>
+    .btn1{
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+</style>
+<div class="container mt-5">
+    <div *ngIf="managemode == 'none'" style='text-align: center;'>
+        <h1>Register for Timesheet App</h1>
+        <hr>
+        <br>
+        <div class="text-center">
+            <div class="row">
+                <div class="col-md-2">
+                    
+                </div>
+                <div class="col-md-2">
+                    <button (click)="manageemployee()" class="btn1 btn btn-primary btn-lg">Manage Current Employee</button>
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-2">
+                    <button (click)="manageclient()" class="btn1 btn btn-primary btn-lg">Manage Clients</button>
+                </div>
+            </div>    
+          </div>
+    </div>
+    
+</div> 

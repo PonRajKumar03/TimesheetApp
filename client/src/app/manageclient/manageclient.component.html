@@ -1,0 +1,100 @@
+<div class="row text-center">
+    <div class="col-md-6" style="padding-right: 60px; padding-left: 60px;">
+        <ng-container>
+            <h1>Manage Clients</h1>
+            <hr>
+            <button class="btn btn-outline-secondary" style="margin-right: 30px;" (click)="addclient()">Add Client</button>
+            <button class="btn btn-outline-secondary" (click)="manageclient()">Manage Existing Clients</button>
+        </ng-container>    
+    </div>
+    
+    <div class="col-md-6 text-left" *ngIf="addclientmode || manageclientmode" style="padding-right: 60px; padding-left: 60px;">
+        <ng-container *ngIf="addclientmode">
+            <h2>Add new client</h2>
+            <hr>
+            <form #newclientform ="ngForm" (ngSubmit)="addnewclient()" class="container mr-3">
+                <div class="form-group">
+                    <input class="form-control" type="text" [(ngModel)]="model.clientname" name="clientname" placeholder="Client Name">
+                </div>               
+                <div class="form-group">
+                    <input class="form-control" type="text" [(ngModel)]="model.projectname" name="projectname" placeholder="Project Name">
+                </div>                
+                <div class="form-group">
+                    <input class="form-control" type="text" [(ngModel)]="model.projectdetails" name="projectdetails" placeholder="Project Details">
+                </div>  
+                <div class="form-group">
+                    <input class="form-control" type="number" [(ngModel)]="model.hourslimit" name="hourslimit" placeholder="Estimated Number of hours">
+                </div>
+                <div class="form-group text-left" >
+                    <label for="completedate"><strong>Expected Date of Completion:</strong></label>
+                    <input class="form-control  datepicker" [(ngModel)]="model.completedate" name="completedate" type="date" placeholder="Expected date of completion">
+                </div>    
+                <button class="btn btn-success" style="margin-right: 20px;" type="submit">Add</button>
+                <button class="btn btn-warning" (click)="modestoggle()">Cancel</button>
+            </form>
+            
+        </ng-container>
+        <ng-container *ngIf="manageclientmode">
+            <h2>Manage Clients</h2>
+            <hr>
+            <div >
+                <select [(ngModel)]="fetchmodel.clientname" class="form-control">
+                    <option *ngFor="let item of clients" value="{{item}}">{{item}}</option>
+                </select>
+            </div>
+            <br> 
+            <ng-container *ngIf="beforefetch && beforeadd">
+                <div class="text-center">
+                    <button class="btn btn-success" style="margin-right: 20px;" (click)="fetchdetails()">Fetch details</button>
+                <button class="btn btn-success" style="margin-right: 20px;" (click)="addproject()">Add new project</button>           
+                <button class="btn btn-warning" (click)="modestoggle()">Cancel</button>
+                </div>
+                
+            </ng-container>
+            <ng-container *ngIf="!beforeadd">
+                <input class="form-control" type="text" [(ngModel)]="model.projectname" name="projectname" placeholder="Project Name">
+                <br>
+                <input class="form-control" type="text" [(ngModel)]="model.projectdetails" name="projectdetails" id="" placeholder="Project Details">
+                <br>
+                <input class="form-control" type="number" name="noofhours" [(ngModel)]="model.hourslimit" placeholder="Estimated Number of hours">
+                <br>
+                <div class="form-group text-left" >
+                    <label for="completedate"><strong>Expected Date of Completion:</strong></label>
+                    <input class="form-control  datepicker" [(ngModel)]="model.completedate" name="completedate" type="date" placeholder="Expected date of completion">
+                </div>   
+                <div class="text-center">
+                    <button class="btn btn-success" style="margin-right: 20px;" (click)="addnewproject()">Add project</button>
+                </div>
+                
+            </ng-container>
+            
+            <ng-container *ngIf="!beforefetch">
+                <select [(ngModel)]="project" class="form-control" name="project" id="">
+                    <option *ngFor="let item of this.manageService.projects.projectName" value="{{ item }}">{{item}}</option>
+                </select>
+                <br>
+                <ng-container *ngIf="beforeget">
+                    <button class="btn btn-success" style="margin-right: 20px;" (click)="getdetails()">Project details</button>           
+                    <button class="btn btn-warning" (click)="beforefetch == true">Cancel</button>
+                </ng-container>
+                
+                <ng-container *ngIf="!beforeget">
+                    <label for="projectdetails">Project Details:</label>
+                    <input class="form-control" name="projectdetails" type="text" value="{{this.projectdetails}}">
+                    <label for="hourslimit">Project hours:</label>
+                    <input class="form-control" name="hourslimit" type="number" value="{{this.hourslimit}}">
+                    <label for="enddate">Expected end date:</label>
+                    <input class="form-control" name="enddate" type="date" value="{{this.enddate}}">
+
+                    <br>
+                    <button class="btn btn-primary" style="margin-right: 20px;">Mark complete</button>
+                    <button class="btn btn-warning" (click)="modestoggle()">Cancel</button>
+                </ng-container>           
+                
+            </ng-container>    
+            
+           
+        </ng-container>
+            
+    </div>
+</div>

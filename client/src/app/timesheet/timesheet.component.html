@@ -1,0 +1,20 @@
+<style>
+    .btn1{
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+</style>
+<section class="text-center">
+    <div *ngIf="!timesheetMode"> 
+      <h1>Timesheet</h1>
+      <p class="lead text-muted">Please choose one of the below options</p>
+      <p>
+        <button (click)="timesheetToggle('fill')" class="btn1 btn btn-lg btn-primary">Fill Timesheet</button>
+        <button (click)="timesheetview()"class="btn1 btn btn-lg btn-secondary">View Timesheet</button>
+      </p>
+    </div>
+    <div *ngIf="timesheetMode == 'fill'">
+        <app-filltimesheet></app-filltimesheet>
+    </div>
+  </section>
+

@@ -1,0 +1,46 @@
+<div class="text-center row">
+    <div class="col-md-6">
+    <h2>Add employee</h2>
+    <hr>
+    <form #registerForm="ngForm" (ngSubmit)="addemployee()" autocomplete="off" class="text-left">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" name="email" [(ngModel)]="model.email" placeholder="E-mail ID">
+        </div>
+        
+        <div class="form-group">       
+            <label for="firstname">First Name:</label> 
+            <input type="text" class="form-control" name="firstname" [(ngModel)]="model.firstname" placeholder="First Name">
+        </div>
+        
+        <div class="form-group">    
+            <label for="lastname">Last Name:</label>      
+            <input type="text" class="form-control" name="lastname" [(ngModel)]="model.lastname" placeholder="Last Name">
+        </div>
+        <div class="form-group">      
+            <label for="dob">Date of Birth</label>    
+            <input type="date" class="form-control" name="dob" [(ngModel)]="model.dob" placeholder="Date of birth">
+        </div>
+        <div class="form-group">  
+            <label for="position">Position</label>  
+            <select class="form-control" name="position" [(ngModel)]="model.position" >
+                <option value="Manager">Manager</option>
+                <option value="Associate">Associate</option>
+                <option value="HR">HR</option>
+            </select>     
+        </div>
+        <div class="form-group text-center">
+            <button type="submit" class="btn1 btn btn-md btn-success mr-3">Add</button>
+        </div>
+    </form>
+    </div>
+    <div class="col-md-6">
+        <h2>Relieve Employees:</h2>
+        <hr>
+        <select name="firstname" class="form-control" [(ngModel)]="chosenemployee">
+            <option *ngFor="let item of employeeswhole" value="{{item}}">{{item}}</option>
+        </select>
+        <button class="btn btn-danger" (click)="relieveemployee()">Relieve Employee</button>        
+    </div>
+    
+</div>
