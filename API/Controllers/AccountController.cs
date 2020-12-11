@@ -148,6 +148,7 @@ namespace API.Controllers
                 Username = registernewuserDto.Username,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registernewuserDto.Password)),
                 PasswordSalt = hmac.Key,
+                Position = user1.Position
             };
              _context.Users.Add(user);
             await _context.SaveChangesAsync();
