@@ -27,6 +27,8 @@ namespace API
                 var context = services.GetRequiredService<DataContext>();
                 var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 await context.Database.MigrateAsync();
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogInformation("Migration success");
             }
             catch (Exception ex)
             {
