@@ -18,10 +18,12 @@
                     <br>
                     <button class="btn btn-success mr-2" type="submit">Sign In</button>
                     <button class="btn btn-success mr-2"    
-                    type="button" (click)="registertoggle()">New User</button>       
+                    type="button" (click)="registertoggle()">New User</button>
+                    <button class="btn btn-success mr-2"    
+                    type="button" (click)="addtoggle()">Add Email</button>        
                 </form>
             </div>  
-             
+
             <div class="col-md-4">
             </div>     
         </div>     
@@ -54,6 +56,41 @@
                    
                 </div>
             </div>
+        </div>
+        <div *ngIf="addmode">
+            <h2>Add employee</h2>
+            <hr>
+            <form #registerForm="ngForm" (ngSubmit)="addemployee()" autocomplete="off" class="text-left">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" name="email" [(ngModel)]="model1.email" placeholder="E-mail ID">
+                </div>
+                
+                <div class="form-group">       
+                    <label for="firstname">First Name:</label> 
+                    <input type="text" class="form-control" name="firstname" [(ngModel)]="model1.firstname" placeholder="First Name">
+                </div>
+                
+                <div class="form-group">    
+                    <label for="lastname">Last Name:</label>      
+                    <input type="text" class="form-control" name="lastname" [(ngModel)]="model1.lastname" placeholder="Last Name">
+                </div>
+                <div class="form-group">      
+                    <label for="dob">Date of Birth</label>    
+                    <input type="date" class="form-control" name="dob" [(ngModel)]="model1.dob" placeholder="Date of birth">
+                </div>
+                <div class="form-group">  
+                    <label for="position">Position</label>  
+                    <select class="form-control" name="position" [(ngModel)]="model1.position" >
+                        <option value="Manager">Manager</option>
+                        <option value="Associate">Associate</option>
+                        <option value="HR">HR</option>
+                    </select>     
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn1 btn btn-md btn-success mr-3">Add</button>
+                </div>
+            </form>
         </div>
                    
 </div> 

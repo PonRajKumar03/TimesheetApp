@@ -40,6 +40,7 @@
         <select name="firstname" class="form-control" [(ngModel)]="chosenemployee">
             <option *ngFor="let item of employeeswhole" value="{{item}}">{{item}}</option>
         </select>
+        <br>
         <button class="btn btn-danger" (click)="relieveemployee()">Relieve Employee</button>        
     </div>
     

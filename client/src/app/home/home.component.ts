@@ -13,6 +13,15 @@ export class HomeComponent implements OnInit {
   model: any = {};
   registerMode = false;
   loggedin = false;
+  addmode = false;
+  model1 = {
+    'managermail':'',
+    'email':'',
+    'firstname':'',
+    'lastname':'',
+    'dob': Date,
+    'position':''
+  };
 
 
   constructor(public accountService : AccountService, private router: Router, private toastr: ToastrService) { }
@@ -30,6 +39,11 @@ export class HomeComponent implements OnInit {
   registertoggle(){
     this.registerMode = !this.registerMode;
   }
+
+  addtoggle(){
+    this.addmode = !this.addmode;
+  }
+
 
   login(){
     if(this.model.email == null){
@@ -50,6 +64,19 @@ export class HomeComponent implements OnInit {
       })
     }
     
+  }
+  home(){
+   window.location.reload();
+  }
+  addemployee(){
+    this.accountService.adduser(this.model1).subscribe(response => {
+      this.home();
+      this.toastr.info("Added Successfully");
+      console.log(response);      
+    }, error => {
+      console.log(error);
+      this.toastr.error(error.error);
+    }) 
   }
 
   cancel(){
