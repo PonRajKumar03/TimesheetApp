@@ -83,6 +83,12 @@ namespace API.Controllers
              _context.Timesheet.Add(sheet);
             await _context.SaveChangesAsync();
 
+            user.AllowedDate = 0;
+            
+            _context.Attach<AppUser>(user).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
             var currentDate = sheetdto.Date.AddDays(1);
 
             var Date = await _context.Timesheet.OrderBy(x => x.Id).Where(x => x.Email_ID == sheet.Email_ID && x.Date == currentDate).Select(x => x.Datestring).ToListAsync();
